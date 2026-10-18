@@ -1,0 +1,128 @@
+{
+  "cta": "assets/cta_booking.mp4",
+  "beats": [
+    {
+      "text": "POV: You made\nyour own **sushi**\nin **Tsukiji**",
+      "size": 100,
+      "clips": [
+        {
+          "src": "IMG_8475_3",
+          "in": 1.0,
+          "dur": 1.6
+        },
+        {
+          "src": "IMG_8474",
+          "in": 0.8,
+          "dur": 1.2
+        }
+      ]
+    },
+    {
+      "text": "A real **sushi chef**\nshows you how",
+      "size": 84,
+      "clips": [
+        {
+          "src": "IMG_8453_2",
+          "in": 0.3,
+          "dur": 1.4
+        },
+        {
+          "src": "IMG_8460",
+          "in": 1.6,
+          "dur": 1.4
+        },
+        {
+          "src": "IMG_8461_2",
+          "in": 3.0,
+          "dur": 1.3
+        }
+      ]
+    },
+    {
+      "text": "Then it's\n**your turn**",
+      "size": 92,
+      "clips": [
+        {
+          "src": "IMG_8466",
+          "in": 0.6,
+          "dur": 1.3
+        },
+        {
+          "src": "IMG_8470_2",
+          "in": 1.5,
+          "dur": 1.3
+        },
+        {
+          "src": "IMG_8472",
+          "in": 0.5,
+          "dur": 1.3
+        },
+        {
+          "src": "IMG_8472_3",
+          "in": 1.0,
+          "dur": 1.3
+        }
+      ]
+    },
+    {
+      "text": "**No experience**\nneeded",
+      "size": 92,
+      "clips": [
+        {
+          "src": "IMG_8473",
+          "in": 1.9,
+          "dur": 1.5
+        },
+        {
+          "src": "IMG_8476_3",
+          "in": 1.8,
+          "dur": 1.5
+        }
+      ]
+    },
+    {
+      "text": "Eat the sushi\n**you** made",
+      "size": 92,
+      "clips": [
+        {
+          "src": "IMG_8479_2",
+          "in": 0.0,
+          "dur": 1.3
+        },
+        {
+          "src": "IMG_8481_3",
+          "in": 1.7,
+          "dur": 1.4
+        },
+        {
+          "src": "IMG_8482",
+          "in": 0.3,
+          "dur": 1.3
+        }
+      ]
+    },
+    {
+      "text": "**Cheers**\nfrom Tsukiji!",
+      "size": 96,
+      "clips": [
+        {
+          "src": "IMG_8489",
+          "in": 0.0,
+          "dur": 1.3
+        },
+        {
+          "src": "IMG_8487",
+          "in": 1.0,
+          "dur": 1.4
+        },
+        {
+          "src": "IMG_8487_2",
+          "in": 0.3,
+          "dur": 1.8
+        }
+      ]
+    }
+  ],
+  "bgm_file": "optimistic-road-trip-loop-no2.mp3",
+  "bgm_start": 0
+}
