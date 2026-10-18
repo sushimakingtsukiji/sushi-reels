@@ -1,4 +1,4 @@
-# 寿司体験リール 型（v2）
+# 寿司体験リール 型（v5）
 
 ## ビジネス前提
 - 築地で実際に営業している寿司店のカウンターで、訪日外国人向けに握り体験を提供
@@ -25,7 +25,7 @@
 
 ## 予約導線パート（全SNS共通）
 - **Webサイト部分のみ**を使い、全プラットフォームで同じ締めにする（SNSのプロフ画面は映さない）
-- 完成済みクリップ：`assets/cta_booking.mp4`（約5.2秒、1080x1920）。毎回これを最後に付けるだけ
+- 完成済みクリップ：`assets/cta_booking.mp4`（ナレーション入りで約6秒、1080x1920）。毎回これを最後に付けるだけ
   - 「Tap the link in our bio」→ サイトのトップ〜スクロール →「Hit BOOK NOW」（赤丸＋矢印）→「Pick your date / See you in Tsukiji!」で予約画面
   - 背景はサイトと同じクリーム色、文字はサイトの紺＋ロゴの赤
   - **英語ナレーション入り**（AI音声 Kokoro / af_heart・アメリカ英語の女性）：「Tap the link in our bio. / Hit Book Now! / Pick your date, and see you in Tsukiji!」を各ステップの頭に配置。約6秒
@@ -58,6 +58,9 @@
 - 動画の受け渡し：GitHub公開リポジトリ `sushimakingtsukiji/sushi-reels` に `reel_XXX.mp4` をpush → `https://raw.githubusercontent.com/sushimakingtsukiji/sushi-reels/main/reel_XXX.mp4` をMetricoolの`media`に渡す（Metricoolが自社ストレージにコピーするので確実）
 - **カバー（サムネ）を全SNSでそろえる**：`videoCoverMilliseconds: 800`（冒頭のフック画面）をMetricoolに毎回指定。指定しないとFacebookだけ別のコマを自動で選ぶ
 - YouTubeは @SushiMakingTsukiji（チャンネルID UCveAgsMJRwvfZNh3LF2AmLw、所有者 lovefootball624@gmail.com のGoogleログインで接続）
+- 投稿結果の確認は**投稿翌朝の日本時間9:15**（2:00投稿なら同じ日の9:15）。夜中に通知しないため
+- **公開済みの投稿のカバーや動画はMetricoolから変更できない**：直す必要があれば、そのSNSだけ再投稿する（再投稿の前に必ずしゅんのOKをもらう）。古い投稿の削除はしゅんに頼む
+- Metricoolの画面の表示タイムゾーンがマドリードのままだと、正しい予約にも「Publish date can't be a past date」と出る。実際の予約は getScheduledPosts で確認する
 - Metricool必須項目：TikTokの`title`、YouTubeの`title`・`madeForKids`、Facebookリールの`title`
 - YouTubeタイトル例：「Make Your Own Sushi with a Real Chef in Tsukiji, Tokyo 🍣」／カテゴリ TRAVEL_EVENTS
 
@@ -71,19 +74,28 @@
 - 完成動画＋英語の投稿キャプション＋ハッシュタグをセットで渡す
 - フィードバックのたびにこのファイルを更新して次回に反映
 
+## 素材の受け取り
+- 素材は、しゅんのMacのデスクトップ `寿司体験/<開催日>/動画/` から取る。開催日ごとにフォルダが増えていく。チャットに直接添付されたときは例外扱い（開催日を聞いてから同じ名前の付け方で取り込む）
+- `写真/` など `動画/` 以外のフォルダは使わない
+- 素材フォルダを見るのは、しゅんに「素材入れたから動画作って」と言われたときだけ。毎日の自動確認やスケジュール済みタスクは作らない（毎朝8:00に確認する案は取りやめた）
+- `footage_catalog.md` の「取り込み済みの開催日」に無い日付フォルダを新しい素材とする。新しい日付フォルダが見つからないときは、作業を止めてフォルダ名を確認する
+- 新しい素材は非公開リポジトリ sushi-footage の `footage/` に `<開催日YYYYMMDD>_<元の名前>` の形で保存する（公開の sushi-reels には置かない）。デスクトップのファイルは動かさない・消さない
+- 新しい開催日の素材を主役にして、足りないカットだけ過去の素材で補う
+
 ## 制作の仕組み
-- 素材一覧：`docs/footage_catalog.md`（素材本体は非公開リポジトリ sushi-footage の footage/）（92本、シーン別・★はおすすめカット）
+- 素材一覧：`docs/footage_catalog.md`（素材本体は非公開リポジトリ sushi-footage の footage/）（開催日ごと・シーン別、★はおすすめカット。取り込み済みの開催日の一覧もここ）
 - 動画ごとのカット表：`videos/<番号_テーマ>/edit.json`（どの素材の何秒からを何秒使うか＋テロップ）
 - 書き出し：`python3 pipeline/build_reel.py videos/.../edit.json videos/.../reel_XXX.mp4`
 - 素材を使い回す間は、同じカットが続けて使われないよう、動画ごとにテーマ（切り口）とカットの組み合わせを変える
 
 ## 投稿履歴
-| No. | テーマ | フック | 主なカット |
-|---|---|---|---|
-| 001 | 初回投稿（体験の流れ） | MAKE YOUR OWN SUSHI IN TOKYO! | 時系列 |
-| 002 | POV：自分で握る体験（BGM: optimistic-road-trip／2026-10-18 公開：IG Demmvgfj-Md／TikTok 7697683978794519815／FB reel 2391165585047117／YT shorts lROFlmEeX6U） | POV: You made your own sushi in Tsukiji | 8475_3, 8474, 8466, 8472, 8473, 8476_3, 8482, 8487 |
+| No. | テーマ | 使った開催日 | フック | 主なカット |
+|---|---|---|---|---|
+| 001 | 初回投稿（体験の流れ） | — | MAKE YOUR OWN SUSHI IN TOKYO! | 時系列 |
+| 002 | POV：自分で握る体験（BGM: optimistic-road-trip／2026-10-18 公開：IG Demmvgfj-Md／TikTok 7697683978794519815／FB reel 2391165585047117／YT shorts lROFlmEeX6U）※FBはカバー修正のため3:08に、YouTubeは2:58に再投稿。古い投稿（FB reel 1429328741989688・YT shorts gvVJgArSHZw）は削除済み | 9:16（以前の素材） | POV: You made your own sushi in Tsukiji | 8475_3, 8474, 8466, 8472, 8473, 8476_3, 8482, 8487 |
 
 ## 変更履歴
+- v5：素材の受け取り方（デスクトップの開催日フォルダ・声をかけられたときだけ確認）、投稿結果の確認時刻、公開後の修正ルールを追記。投稿履歴に「使った開催日」の欄を追加（2026-10-18）
 - v4：BGMをユーザー選曲の無料音源ライブラリ方式に変更（2026-10-17）
 - v3：BGM自動作曲＋元素材の音を残す、締めに英語ナレーション（2026-10-17）
 - v1：初回投稿（igexport-DdwYl23NlLl）の分析
