@@ -81,7 +81,10 @@ def frame_stats(src, t, extra_vf=""):
     luma = a @ [0.299, 0.587, 0.114]
     mx, mn = a.max(1), a.min(1)
     sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0)
-    r, g, b = a.mean(0)
+    # white balance from the brighter pixels (walls, jackets, rice) so dark clothes and
+    # red fish don't skew it
+    hi = a[luma >= np.percentile(luma, 70)]
+    r, g, b = hi.mean(0)
     return dict(r=r, g=g, b=b, l=luma.mean(), ls=luma.std(), s=sat.mean())
 
 
@@ -90,8 +93,8 @@ def grade_vf(src, t, ref, k_bright=0.5):
     brightness) towards the reference clip, so every cut shares one look."""
     clamp = lambda v, lo, hi: max(lo, min(hi, v))
     st = frame_stats(src, t)
-    gr = clamp((ref["r"] / ref["g"]) / (st["r"] / st["g"]), 0.85, 1.2)
-    gb = clamp((ref["b"] / ref["g"]) / (st["b"] / st["g"]), 0.8, 1.15)
+    gr = clamp((ref["r"] / ref["g"]) / (st["r"] / st["g"]), 0.75, 1.2)
+    gb = clamp((ref["b"] / ref["g"]) / (st["b"] / st["g"]), 0.8, 1.4)
     vf = f"colorchannelmixer=rr={gr:.3f}:bb={gb:.3f}"
     st2 = frame_stats(src, t, vf)
     con = clamp(ref["ls"] / st2["ls"], 0.95, 1.25)
