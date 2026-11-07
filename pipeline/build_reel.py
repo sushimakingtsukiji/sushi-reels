@@ -11,6 +11,8 @@ edit.json:
     ...
   ]
 }
+Optional "match_ref": {"src": ..., "in": ...} grades every clip towards that clip's look
+(white balance, contrast, saturation, half the brightness gap); the ref clip keeps the base look.
 Text: "\\n" = line break, **word** = yellow highlight.
 """
 import json, os, re, subprocess, sys, glob, tempfile
@@ -64,6 +66,48 @@ def text_png(text, size, path):
     im.save(path)
 
 
+def frame_stats(src, t, extra_vf=""):
+    """Mean R,G,B, luma mean/std and mean saturation of a few frames around t."""
+    import numpy as np
+    vals = []
+    for dt in (0.0, 0.4, 0.8):
+        png = os.path.join(tmp, "stat.png")
+        vf = "scale=270:-2" + ("," + extra_vf if extra_vf else "")
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(max(0, t + dt)), "-i", src,
+                        "-frames:v", "1", "-vf", vf, png], check=True)
+        a = np.asarray(Image.open(png).convert("RGB"), dtype=float)
+        vals.append(a.reshape(-1, 3))
+    a = np.concatenate(vals)
+    luma = a @ [0.299, 0.587, 0.114]
+    mx, mn = a.max(1), a.min(1)
+    sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0)
+    r, g, b = a.mean(0)
+    return dict(r=r, g=g, b=b, l=luma.mean(), ls=luma.std(), s=sat.mean())
+
+
+def grade_vf(src, t, ref, k_bright=0.5):
+    """ffmpeg filter that pulls a clip's white balance, contrast, saturation (and partly
+    brightness) towards the reference clip, so every cut shares one look."""
+    clamp = lambda v, lo, hi: max(lo, min(hi, v))
+    st = frame_stats(src, t)
+    gr = clamp((ref["r"] / ref["g"]) / (st["r"] / st["g"]), 0.85, 1.2)
+    gb = clamp((ref["b"] / ref["g"]) / (st["b"] / st["g"]), 0.8, 1.15)
+    vf = f"colorchannelmixer=rr={gr:.3f}:bb={gb:.3f}"
+    st2 = frame_stats(src, t, vf)
+    con = clamp(ref["ls"] / st2["ls"], 0.95, 1.25)
+    sat = clamp(ref["s"] / st2["s"], 0.9, 1.4)
+    target = st2["l"] * (1 - k_bright) + ref["l"] * k_bright
+    import math
+    gam = clamp(math.log(st2["l"] / 255) / math.log(target / 255), 0.8, 1.2)
+    return vf + f",eq=contrast={con:.3f}:saturation={sat:.3f}:gamma={gam:.3f}"
+
+
+BASE_LOOK = "eq=saturation=1.08:contrast=1.03"
+REF = None
+if spec.get("match_ref"):
+    mr = spec["match_ref"]
+    REF = frame_stats(find_src(mr["src"]), mr["in"], BASE_LOOK)
+
 segs = []
 n = 0
 for bi, beat in enumerate(spec["beats"]):
@@ -71,8 +115,12 @@ for bi, beat in enumerate(spec["beats"]):
     text_png(beat["text"], beat.get("size", 84), tp)
     for c in beat["clips"]:
         out = os.path.join(tmp, f"seg{n:02d}.mp4")
+        if REF and not (c["src"] == spec["match_ref"]["src"]):
+            look = grade_vf(find_src(c["src"]), c["in"], REF)
+        else:
+            look = BASE_LOOK
         vf = (f"[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
-              f"fps=30,eq=saturation=1.08:contrast=1.03,setsar=1[v];[v][1:v]overlay=0:0,format=yuv420p[o];"
+              f"fps=30,{look},setsar=1[v];[v][1:v]overlay=0:0,format=yuv420p[o];"
               # real room sound: clean rumble, even out level between clips, soft edges at the cuts
               f"[0:a]aresample=48000,highpass=f=90,dynaudnorm=f=150:g=15:p=0.7,volume={ORIG_GAIN * c.get('vol', 1.0)},"
               f"afade=t=in:d=0.04,afade=t=out:st={max(0, c['dur'] - 0.06)}:d=0.06,apad[a]")
