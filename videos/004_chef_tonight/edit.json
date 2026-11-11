@@ -1,6 +1,6 @@
 {
  "look": {
-  "post": "colorchannelmixer=rr=1.05:gg=1.0:bb=0.88,eq=brightness=0.04:gamma=1.10:saturation=1.15:contrast=1.04"
+  "post": "colorchannelmixer=rr=1.06:gg=1.0:bb=0.86,eq=brightness=0.02:gamma=1.04:saturation=1.32:contrast=1.10"
  },
  "text_style": "kinetic",
  "cta": "assets/cta_booking.mp4",
@@ -79,7 +79,7 @@
    "emoji": "🔪"
   },
   {
-   "text": "Then enjoy it\nat the **counter**",
+   "text": "Then eat the sushi\n**you made**",
    "size": 68,
    "clips": [
     {
@@ -103,7 +103,7 @@
    "emoji": "🥢"
   },
   {
-   "text": "Every bite,\n**worth it**",
+   "text": "Your own nigiri,\n**so good!**",
    "size": 70,
    "clips": [
     {
