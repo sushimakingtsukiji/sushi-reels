@@ -172,3 +172,134 @@ def render_beat(beat, beat_start, beat_dur, body_dur, glob, outdir):
         render_text(c, beat, t)
         c.save(os.path.join(outdir, f"{i:04d}.png"), compress_level=1)
     return os.path.join(outdir, "%04d.png")
+
+
+# ---- 2026-11-12 second round: three more caption designs (no top bar / badge) ----
+F_REG = "/usr/share/fonts/opentype/inter/Inter-SemiBold.otf"
+F_XB = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"
+
+
+def _plain(text):
+    return text.replace("**", "")
+
+
+def render_type(canvas, beat, t):
+    """Typewriter: letters appear one by one on a dark translucent box (lower third),
+    keyword in warm yellow. Feels like a story being told."""
+    size = beat.get("size", 64)
+    f = font(F_XB, size)
+    cy = beat.get("y", 1300)
+    lines = beat["text"].split("\n")
+    total = sum(len(_plain(l)) for l in lines)
+    shown = int(min(total, max(0, t) / 0.035))
+    lh = int(size * 1.3)
+    d0 = ImageDraw.Draw(canvas)
+    maxw = max(d0.textlength(_plain(l), font=f) for l in lines)
+    bw, bh = maxw + 70, lh * len(lines) + 40
+    k = ease_out(t / 0.18)
+    box = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(box).rounded_rectangle([(W - bw) / 2, cy - bh / 2, (W + bw) / 2, cy + bh / 2],
+                                          radius=26, fill=(15, 15, 20, int(150 * k)))
+    canvas.alpha_composite(box)
+    d = ImageDraw.Draw(canvas)
+    y = cy - bh / 2 + 20
+    n = 0
+    for line in lines:
+        x = (W - d.textlength(_plain(line), font=f)) / 2
+        for p, hl in parse(line):
+            for ch in p:
+                if n < shown:
+                    d.text((x, y), ch, font=f, fill=(255, 205, 64) if hl else WHITE)
+                x += d.textlength(ch, font=f)
+                n += 1
+        y += lh
+    # blinking cursor while typing
+    if shown < total or int(t * 3) % 2 == 0:
+        pass
+
+
+def render_sticker(canvas, beat, t, idx):
+    """Sticker: each line is a slightly tilted paper sticker (cream / brand red) that pops in.
+    Playful, scrapbook feel. Tilt alternates per line and per beat."""
+    size = beat.get("size", 78)
+    f = font(F_BIG, size)
+    cy = beat.get("y", 1200)
+    lines = beat["text"].split("\n")
+    lh = int(size * 1.55)
+    top = cy - lh * len(lines) / 2
+    for li, line in enumerate(lines):
+        k = (t - li * 0.12) / 0.25
+        if k <= 0:
+            continue
+        hl_line = "**" in line
+        bg = RED if hl_line else CREAM
+        fg = WHITE if hl_line else NAVY
+        txt = _plain(line)
+        tw = ImageDraw.Draw(canvas).textlength(txt, font=f)
+        l, tt, r, b = f.getbbox(txt)
+        pw, ph = int(tw + 64), int(b - tt + 44)
+        st = Image.new("RGBA", (pw + 40, ph + 40), (0, 0, 0, 0))
+        sh = Image.new("RGBA", st.size, (0, 0, 0, 0))
+        ImageDraw.Draw(sh).rounded_rectangle([24, 28, 24 + pw, 28 + ph], radius=14, fill=(0, 0, 0, 90))
+        st.alpha_composite(sh.filter(ImageFilter.GaussianBlur(6)))
+        dd = ImageDraw.Draw(st)
+        dd.rounded_rectangle([20, 20, 20 + pw, 20 + ph], radius=14, fill=bg + (255,))
+        dd.text((20 + 32 - l, 20 + 22 - tt), txt, font=f, fill=fg)
+        ang = (3.5 if (li + idx) % 2 == 0 else -3.0)
+        s = max(0.01, back_out(k))
+        st = st.rotate(ang, resample=Image.BICUBIC, expand=True)
+        st = st.resize((max(1, int(st.width * s)), max(1, int(st.height * s))), Image.LANCZOS)
+        st.putalpha(st.getchannel("A").point(lambda v: int(v * min(1, k * 2))))
+        xoff = (-40 if (li + idx) % 2 == 0 else 40) if len(lines) > 1 else 0
+        canvas.alpha_composite(st, (int(W / 2 + xoff - st.width / 2), int(top + li * lh + lh / 2 - st.height / 2)))
+
+
+def render_big(canvas, beat, t):
+    """Big word: one huge keyword across the screen that wipes in from the left (outlined
+    white), with a small line of context above it. Editorial / magazine feel."""
+    cy = beat.get("y", 1180)
+    lines = beat["text"].split("\n")
+    small = _plain(lines[0]) if len(lines) > 1 else ""
+    bigw = _plain(lines[-1]).upper()
+    size = beat.get("size", 150)
+    f = font(F_BIG, size)
+    while ImageDraw.Draw(canvas).textlength(bigw, font=f) > W - 100 and size > 60:
+        size -= 6; f = font(F_BIG, size)
+    l, tt, r, b = f.getbbox(bigw)
+    im = Image.new("RGBA", (r - l + 60, b - tt + 60), (0, 0, 0, 0))
+    sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    ImageDraw.Draw(sh).text((30 - l + 4, 30 - tt + 8), bigw, font=f, fill=(0, 0, 0, 150))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)))
+    ImageDraw.Draw(im).text((30 - l, 30 - tt), bigw, font=f, fill=WHITE,
+                            stroke_width=max(3, size // 30), stroke_fill=(30, 30, 30))
+    k = ease_out((t - 0.12) / 0.35)
+    if k > 0:
+        mask = Image.new("L", im.size, 0)
+        ImageDraw.Draw(mask).rectangle([0, 0, int(im.width * k), im.height], fill=255)
+        a = Image.composite(im.getchannel("A"), Image.new("L", im.size, 0), mask)
+        im.putalpha(a)
+        canvas.alpha_composite(im, (int((W - im.width) / 2), int(cy - im.height / 2)))
+    if small:
+        fs = font(F_XB, 56)
+        ks = ease_out(t / 0.25)
+        tw = ImageDraw.Draw(canvas).textlength(small, font=fs)
+        lab = Image.new("RGBA", (int(tw + 50), 86), (0, 0, 0, 0))
+        ImageDraw.Draw(lab).rounded_rectangle([0, 0, lab.width - 1, 85], radius=43, fill=(255, 196, 0, 255))
+        ImageDraw.Draw(lab).text((25, 10), small, font=fs, fill=(25, 25, 25))
+        lab.putalpha(lab.getchannel("A").point(lambda v: int(v * ks)))
+        canvas.alpha_composite(lab, (int((W - lab.width) / 2), int(cy - im.height / 2 - 70 - 30 * (1 - ks))))
+
+
+_beat_counter = [0]
+_render_text_orig = render_text
+
+
+def render_text(canvas, beat, t):  # noqa: F811  (dispatch incl. new designs)
+    a = beat.get("anim", "pop")
+    if a == "type":
+        return render_type(canvas, beat, t)
+    if a == "sticker":
+        return render_sticker(canvas, beat, t, beat.get("_idx", 0))
+    if a == "big":
+        return render_big(canvas, beat, t)
+    return _render_text_orig(canvas, beat, t)
