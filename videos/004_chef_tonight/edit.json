@@ -1,12 +1,11 @@
 {
- "text_style": "kinetic",
  "cta": "assets/cta_booking.mp4",
  "bgm_file": "optimistic-road-trip-loop-no2.mp3",
  "bgm_start": 38,
  "beats": [
   {
    "text": "Tonight, **you're**\nthe **sushi chef**",
-   "size": 72,
+   "size": 100,
    "clips": [
     {
      "src": "20261110_IMG_7738",
@@ -18,42 +17,33 @@
      "in": 6.3,
      "dur": 1.6
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "🍣"
+   ]
   },
   {
-   "text": "Chef's coat: **ON**",
-   "size": 72,
+   "text": "Chef's coat:\n**ON**",
+   "size": 92,
    "clips": [
     {
      "src": "20261110_IMG_7738",
      "in": 9.0,
      "dur": 1.6
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "✨"
+   ]
   },
   {
    "text": "Meet your\n**Tsukiji chef**",
-   "size": 68,
+   "size": 88,
    "clips": [
     {
      "src": "20261110_IMG_7739",
      "in": 5.4,
      "dur": 1.5
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "👋"
+   ]
   },
   {
    "text": "Watch those\n**knife skills**",
-   "size": 68,
+   "size": 88,
    "clips": [
     {
      "src": "20261110_IMG_7740",
@@ -75,14 +65,11 @@
      "in": 11.0,
      "dur": 2.2
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "🔪"
+   ]
   },
   {
    "text": "Then eat the sushi\n**you made**",
-   "size": 68,
+   "size": 88,
    "clips": [
     {
      "src": "20261110_IMG_7741",
@@ -99,14 +86,11 @@
      "in": 12.0,
      "dur": 1.3
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "🥢"
+   ]
   },
   {
    "text": "Your own nigiri,\n**so good!**",
-   "size": 70,
+   "size": 92,
    "clips": [
     {
      "src": "20261110_IMG_7741",
@@ -118,26 +102,19 @@
      "in": 25.5,
      "dur": 1.3
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "😋"
+   ]
   },
   {
    "text": "See you in\n**Tsukiji!**",
-   "size": 74,
+   "size": 96,
    "clips": [
     {
      "src": "20261110_IMG_7741",
      "in": 22.3,
      "dur": 2.3
     }
-   ],
-   "anim": "native",
-   "y": 1240,
-   "emoji": "🙌"
+   ]
   }
  ],
- "kinetic": {},
  "original_color": true
 }
