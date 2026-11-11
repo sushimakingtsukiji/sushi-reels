@@ -46,7 +46,43 @@ def find_src(name):
     sys.exit(f"source not found: {name} (looked in {FOOTAGE_DIRS})")
 
 
+LABEL_FONT = "/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf"
+NAVY, RED, CREAM = (27, 42, 74), (215, 38, 61), (255, 246, 232)
+
+
+def label_png(text, size, path, center_y):
+    """text_style "label" (2026-11-12, 004): each line sits on its own cream rounded box,
+    navy text, **word** in the brand red. Calmer, magazine-like alternative to the
+    white-with-black-outline captions."""
+    im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    f = ImageFont.truetype(LABEL_FONT, size)
+    lines = text.split("\n")
+    pad_x, pad_y, gap = int(size * 0.42), int(size * 0.24), int(size * 0.16)
+    asc, desc = f.getmetrics()
+    box_h = asc + desc + pad_y * 2
+    y = center_y - (box_h * len(lines) + gap * (len(lines) - 1)) // 2
+    for line in lines:
+        parts = [(p, i % 2 == 1) for i, p in enumerate(re.split(r"\*\*", line)) if p]
+        widths = [d.textlength(p, font=f) for p, _ in parts]
+        tw = sum(widths)
+        x0 = (W - tw) / 2 - pad_x
+        sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        ImageDraw.Draw(sh).rounded_rectangle([x0 + 6, y + 8, x0 + tw + 2 * pad_x + 6, y + box_h + 8],
+                                             radius=box_h // 3, fill=(0, 0, 0, 70))
+        im.alpha_composite(sh)
+        d.rounded_rectangle([x0, y, x0 + tw + 2 * pad_x, y + box_h], radius=box_h // 3, fill=CREAM + (245,))
+        x = x0 + pad_x
+        for (p, hl), w in zip(parts, widths):
+            d.text((x, y + pad_y), p, font=f, fill=RED if hl else NAVY)
+            x += w
+        y += box_h + gap
+    im.save(path)
+
+
 def text_png(text, size, path):
+    if spec.get("text_style") == "label":
+        return label_png(text, size, path, spec.get("text_y", TEXT_CENTER_Y))
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     f = ImageFont.truetype(FONT, size)
