@@ -1,5 +1,5 @@
 {
- "match_ref": {"src": "20261104_IMG_8912", "in": 0.3},
+ "look": {"post": "colorbalance=rm=0.12:gm=0.03:bm=-0.14:rh=0.07:gh=0.02:bh=-0.08,eq=brightness=0.04:gamma=1.12:saturation=1.15:contrast=1.03"},
  "cta": "assets/cta_booking.mp4",
  "bgm_file": "optimistic-road-trip-loop-no2.mp3",
  "bgm_start": 38,
@@ -7,18 +7,18 @@
   {"text": "Tonight, **you're**\nthe **sushi chef**", "size": 96,
    "clips": [{"src": "20261110_IMG_7738", "in": 0.3, "dur": 1.3}, {"src": "20261110_IMG_7738", "in": 6.4, "dur": 1.4}]},
   {"text": "Suit up in a\nreal **chef's coat**", "size": 88,
-   "clips": [{"src": "20261110_IMG_7738", "in": 9.0, "dur": 1.5}]},
+   "clips": [{"src": "20261110_IMG_7738", "in": 9.0, "dur": 1.4}, {"src": "20261110_IMG_7738", "in": 10.4, "dur": 1.3}]},
   {"text": "Meet your\n**Tsukiji chef**", "size": 88,
-   "clips": [{"src": "20261110_IMG_7739", "in": 5.2, "dur": 1.6}]},
+   "clips": [{"src": "20261110_IMG_7739", "in": 5.4, "dur": 1.6}]},
   {"text": "Watch the\n**knife skills**", "size": 88,
-   "clips": [{"src": "20261110_IMG_7740", "in": 0.0, "dur": 1.4}, {"src": "20261110_IMG_7740", "in": 11.0, "dur": 1.5}]},
+   "clips": [{"src": "20261110_IMG_7740", "in": 0.0, "dur": 1.4}, {"src": "20261110_IMG_7740", "in": 4.6, "dur": 1.4}, {"src": "20261110_IMG_7740", "in": 11.0, "dur": 1.4}]},
   {"text": "Now **your turn**:\nshape the **nigiri**", "size": 84,
-   "clips": [{"src": "20261104_IMG_8897", "in": 9.0, "dur": 1.4}, {"src": "20261104_IMG_8898", "in": 30.0, "dur": 1.4}, {"src": "IMG_8476_2", "in": 1.4, "dur": 1.5}, {"src": "20261104_IMG_8905", "in": 15.0, "dur": 1.5}]},
-  {"text": "Plate it up\n**like a pro**", "size": 88,
-   "clips": [{"src": "20261104_IMG_7686", "in": 4.6, "dur": 1.6}]},
+   "clips": [{"src": "20261104_IMG_8898", "in": 30.0, "dur": 1.4}, {"src": "20261104_IMG_8905", "in": 15.0, "dur": 1.5}]},
   {"text": "Then enjoy it\nat the **counter**", "size": 88,
-   "clips": [{"src": "20261110_IMG_7741", "in": 0.2, "dur": 1.5}, {"src": "20261110_IMG_7741", "in": 3.0, "dur": 1.4}, {"src": "20261110_IMG_7741", "in": 22.3, "dur": 1.6}]},
+   "clips": [{"src": "20261110_IMG_7741", "in": 0.2, "dur": 1.5}, {"src": "20261110_IMG_7741", "in": 3.0, "dur": 1.4}, {"src": "20261110_IMG_7741", "in": 12.0, "dur": 1.4}]},
+  {"text": "Every bite,\n**worth it**", "size": 92,
+   "clips": [{"src": "20261110_IMG_7741", "in": 17.0, "dur": 1.4}, {"src": "20261110_IMG_7741", "in": 25.5, "dur": 1.4}]},
   {"text": "**See you**\nin **Tsukiji!**", "size": 96,
-   "clips": [{"src": "20261104_IMG_8888", "in": 2.5, "dur": 2.0}]}
+   "clips": [{"src": "20261110_IMG_7741", "in": 22.3, "dur": 2.0}]}
  ]
 }

@@ -106,6 +106,24 @@ def grade_vf(src, t, ref, k_bright=0.5):
 
 
 BASE_LOOK = "eq=saturation=1.08:contrast=1.03"
+
+
+def warm_vf(src, t, post):
+    """Optional "look": {"post": "<ffmpeg filters>"} in edit.json.
+    Neutralises each clip's white balance and brightness first (so every cut starts from
+    the same point), then applies one shared look on top -- e.g. the bright, orange-warm
+    look Shun asked for on 2026-11-12."""
+    import numpy as np
+    clamp = lambda v, lo, hi: max(lo, min(hi, v))
+    png = os.path.join(tmp, "warm.png")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(t), "-i", src,
+                    "-frames:v", "1", "-vf", "scale=270:-2", png], check=True)
+    a = np.asarray(Image.open(png).convert("RGB"), dtype=float).reshape(-1, 3)
+    luma = a @ [0.299, 0.587, 0.114]
+    r, g, b = a[luma >= np.percentile(luma, 70)].mean(0)
+    gam = clamp((150 / max(luma.mean(), 1)) ** 0.5, 0.9, 1.25)
+    return (f"colorchannelmixer=rr={clamp(g / r, 0.75, 1.2):.3f}:bb={clamp(g / b, 0.8, 1.4):.3f},"
+            f"eq=gamma={gam:.3f},{post}")
 REF = None
 if spec.get("match_ref"):
     mr = spec["match_ref"]
@@ -118,7 +136,9 @@ for bi, beat in enumerate(spec["beats"]):
     text_png(beat["text"], beat.get("size", 84), tp)
     for c in beat["clips"]:
         out = os.path.join(tmp, f"seg{n:02d}.mp4")
-        if REF and not (c["src"] == spec["match_ref"]["src"]):
+        if spec.get("look"):
+            look = warm_vf(find_src(c["src"]), c["in"] + min(0.5, c["dur"] / 2), spec["look"]["post"])
+        elif REF and not (c["src"] == spec["match_ref"]["src"]):
             look = grade_vf(find_src(c["src"]), c["in"], REF)
         else:
             look = BASE_LOOK
