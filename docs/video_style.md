@@ -46,6 +46,7 @@
 ## 投稿キャプション
 - **英語対応はうたってよいが、英語を話すのはスタッフで板前ではない**（しゅん指定 2026-11-12）。「English-speaking chef」のように板前が英語を話すと読める表現は使わず、「English-speaking staff」「friendly English support」などにする。ほかの安心材料：No experience needed／beginners welcome／real sushi counter in Tsukiji
 - ※スキル（sushi-reel-production）には「英語対応をうたわない」と書いたが、こちらが最新（英語対応＝スタッフならOK）
+- **カバーは文字入りのカバー専用画像も作れる**（しゅん指定 2026-11-12、004で採用）：しゅんが選んだ場面を元素材から書き出し（動画のテロップは入れない）、いつものテロップ形式でカバー用の一言（例「Be a sushi chef in Tsukiji」）を入れて、リポジトリ直下に cover_XXX.jpg として push し、Metricool の `videoThumbnailUrl` に raw URL を渡す（videoCoverMilliseconds の代わり）。TikTok・YouTubeはアカウントの種類によって反映されないことがある
 - **カバーは動画ごとに一番いい笑顔の場面を選び、4SNSで統一**（004は20秒地点＝2人の笑顔と締めのテロップ。videoCoverMilliseconds に秒×1000を入れる）。冒頭0.8秒固定ではない
 - **キャプションで体験の工程（着替え→職人→握り→食べる…）を順に説明しない**（しゅん指定 2026-11-12）。動画で見せている流れはテロップに任せ、キャプションはゲストへの感謝・その夜の雰囲気・安心材料など別のことを書く
 - 全SNS共通で同じキャプションを使う（コピペ1回で済むように）
