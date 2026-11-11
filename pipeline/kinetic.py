@@ -303,3 +303,77 @@ def render_text(canvas, beat, t):  # noqa: F811  (dispatch incl. new designs)
     if a == "big":
         return render_big(canvas, beat, t)
     return _render_text_orig(canvas, beat, t)
+
+
+# ---- "native": the TikTok / Reels in-app caption look (2026-11-12, reel 004 final round) ----
+EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
+_emoji_cache = {}
+
+
+def emoji_img(ch, px):
+    k = (ch, px)
+    if k not in _emoji_cache:
+        f = ImageFont.truetype(EMOJI_FONT, 109)
+        im = Image.new("RGBA", (160, 160), (0, 0, 0, 0))
+        ImageDraw.Draw(im).text((10, 10), ch, font=f, embedded_color=True)
+        im = im.crop(im.getbbox())
+        s = px / im.height
+        _emoji_cache[k] = im.resize((max(1, int(im.width * s)), px), Image.LANCZOS)
+    return _emoji_cache[k]
+
+
+def render_native(canvas, beat, t):
+    """White rounded bubble(s) with black bold text -- the caption style viewers already know
+    from TikTok/Instagram, so it reads instantly. **keyword** in warm orange, optional
+    "emoji" after the last line. Pops in (slight overshoot) at the start of the beat."""
+    size = beat.get("size", 66)
+    f = font(F_XB, size)
+    cy = beat.get("y", 1230)
+    lines = beat["text"].split("\n")
+    emo = beat.get("emoji")
+    d0 = ImageDraw.Draw(canvas)
+    asc, desc = f.getmetrics()
+    lh = asc + desc + 26
+    widths = [d0.textlength(_plain(l), font=f) for l in lines]
+    ew = int(size * 1.05) + 14 if emo else 0
+    widths[-1] += ew
+    bw, bh = int(max(widths) + 80), lh * len(lines) + 30
+    blk = Image.new("RGBA", (bw + 40, bh + 40), (0, 0, 0, 0))
+    sh = Image.new("RGBA", blk.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(blk)
+    y = 20 + 15
+    for li, (line, w) in enumerate(zip(lines, widths)):
+        x0 = (blk.width - w) / 2 - 30
+        ImageDraw.Draw(sh).rounded_rectangle([x0 + 2, y - 13 + 6, x0 + w + 62, y + lh - 13 + 6 + (13 if li < len(lines) - 1 else 0)],
+                                             radius=22, fill=(0, 0, 0, 60))
+        d.rounded_rectangle([x0, y - 13, x0 + w + 60, y + lh - 13 + (13 if li < len(lines) - 1 else 0)],
+                            radius=22, fill=(255, 255, 255, 250))
+        y += lh
+    blk = Image.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)), blk)
+    d = ImageDraw.Draw(blk)
+    y = 20 + 15
+    for li, (line, w) in enumerate(zip(lines, widths)):
+        x = (blk.width - w) / 2
+        for p, hl in parse(line):
+            d.text((x, y), p, font=f, fill=(234, 88, 12) if hl else (17, 17, 17))
+            x += d.textlength(p, font=f)
+        if emo and li == len(lines) - 1:
+            e = emoji_img(emo, int(size * 1.05))
+            blk.alpha_composite(e, (int(x + 14), int(y + (asc + desc - e.height) / 2 + 2)))
+        y += lh
+    k = (t) / 0.2
+    s = max(0.01, back_out(k)) * 0.15 + 0.85 if k < 1 else 1.0
+    a = ease_out(k * 1.6)
+    if s != 1.0:
+        blk = blk.resize((max(1, int(blk.width * s)), max(1, int(blk.height * s))), Image.LANCZOS)
+    blk.putalpha(blk.getchannel("A").point(lambda v: int(v * a)))
+    canvas.alpha_composite(blk, (int((W - blk.width) / 2), int(cy - blk.height / 2)))
+
+
+_render_text_v2 = render_text
+
+
+def render_text(canvas, beat, t):  # noqa: F811
+    if beat.get("anim") == "native":
+        return render_native(canvas, beat, t)
+    return _render_text_v2(canvas, beat, t)
