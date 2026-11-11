@@ -167,9 +167,22 @@ if spec.get("match_ref"):
 
 segs = []
 n = 0
+KINETIC = spec.get("text_style") == "kinetic"
+if KINETIC:
+    sys.path.insert(0, HERE)
+    import kinetic
+    body_dur = sum(c["dur"] for b in spec["beats"] for c in b["clips"])
+beat_start = 0.0
 for bi, beat in enumerate(spec["beats"]):
     tp = os.path.join(tmp, f"text{bi}.png")
-    text_png(beat["text"], beat.get("size", 84), tp)
+    bdur = sum(c["dur"] for c in beat["clips"])
+    if KINETIC:
+        seq = kinetic.render_beat(beat, beat_start, bdur, body_dur, spec.get("kinetic", {}),
+                                  os.path.join(tmp, f"beat{bi}"))
+    else:
+        text_png(beat["text"], beat.get("size", 84), tp)
+    off = 0.0
+    beat_start += bdur
     for c in beat["clips"]:
         out = os.path.join(tmp, f"seg{n:02d}.mp4")
         if spec.get("look"):
@@ -185,12 +198,15 @@ for bi, beat in enumerate(spec["beats"]):
               f"afade=t=in:d=0.04,afade=t=out:st={max(0, c['dur'] - 0.06)}:d=0.06,apad[a]")
         subprocess.run([
             "ffmpeg", "-v", "error", "-y", "-ss", str(c["in"]), "-t", str(c["dur"]),
-            "-i", find_src(c["src"]), "-loop", "1", "-i", tp,
+            "-i", find_src(c["src"]),
+            *(["-framerate", "30", "-start_number", str(int(round(off * 30))), "-i", seq] if KINETIC
+              else ["-loop", "1", "-i", tp]),
             "-filter_complex", vf, "-map", "[o]", "-map", "[a]", "-t", str(c["dur"]),
             "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-r", "30",
             "-c:a", "aac", "-b:a", "128k", "-ar", "48000", out], check=True)
         segs.append(out)
         n += 1
+        off += c["dur"]
 
 if spec.get("cta"):
     segs.append(spec["cta"] if os.path.isabs(spec["cta"]) else os.path.join(REPO, spec["cta"]))
