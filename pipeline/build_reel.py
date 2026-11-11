@@ -142,6 +142,18 @@ def grade_vf(src, t, ref, k_bright=0.5):
 
 
 BASE_LOOK = "eq=saturation=1.08:contrast=1.03"
+_hdr_cache = {}
+
+
+def hdr_vf(src):
+    if src not in _hdr_cache:
+        tr = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                             "stream=color_transfer", "-of", "csv=p=0", src],
+                            capture_output=True, text=True).stdout.strip().strip(",")
+        _hdr_cache[src] = ("zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,"
+                           "tonemap=mobius:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,"
+                           if tr in ("arib-std-b67", "smpte2084") else "")
+    return _hdr_cache[src]
 
 
 def warm_vf(src, t, post):
@@ -185,13 +197,18 @@ for bi, beat in enumerate(spec["beats"]):
     beat_start += bdur
     for c in beat["clips"]:
         out = os.path.join(tmp, f"seg{n:02d}.mp4")
-        if spec.get("look"):
+        if spec.get("original_color"):
+            look = "null"      # 2026-11-12: Shun wants the camera's own colours, no grading
+        elif spec.get("look"):
             look = warm_vf(find_src(c["src"]), c["in"] + min(0.5, c["dur"] / 2), spec["look"]["post"])
         elif REF and not (c["src"] == spec["match_ref"]["src"]):
             look = grade_vf(find_src(c["src"]), c["in"], REF)
         else:
             look = BASE_LOOK
-        vf = (f"[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
+        # iPhone HDR clips (HLG / Dolby Vision, from 2026-11-10 on) must be tone-mapped to SDR,
+        # otherwise they come out flat and washed-out. SDR clips pass through untouched.
+        tm = hdr_vf(find_src(c["src"]))
+        vf = (f"[0:v]{tm}scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
               f"fps=30,{look},setsar=1[v];[v][1:v]overlay=0:0,format=yuv420p[o];"
               # real room sound: clean rumble, even out level between clips, soft edges at the cuts
               f"[0:a]aresample=48000,highpass=f=90,dynaudnorm=f=150:g=15:p=0.7,volume={ORIG_GAIN * c.get('vol', 1.0)},"

@@ -1,7 +1,4 @@
 {
- "look": {
-  "post": "colorchannelmixer=rr=1.06:gg=1.0:bb=0.86,eq=brightness=0.02:gamma=1.04:saturation=1.32:contrast=1.10"
- },
  "text_style": "kinetic",
  "cta": "assets/cta_booking.mp4",
  "bgm_file": "optimistic-road-trip-loop-no2.mp3",
@@ -141,5 +138,6 @@
    "emoji": "🙌"
   }
  ],
- "kinetic": {}
+ "kinetic": {},
+ "original_color": true
 }
