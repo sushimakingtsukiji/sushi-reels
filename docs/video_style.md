@@ -48,7 +48,8 @@
 ## 投稿キャプション
 - **英語対応はうたってよいが、英語を話すのはスタッフで板前ではない**（しゅん指定 2026-11-12）。「English-speaking chef」のように板前が英語を話すと読める表現は使わず、「English-speaking staff」「friendly English support」などにする。ほかの安心材料：No experience needed／beginners welcome／real sushi counter in Tsukiji
 - ※スキル（sushi-reel-production）には「英語対応をうたわない」と書いたが、こちらが最新（英語対応＝スタッフならOK）
-- **カバーは文字入りのカバー専用画像も作れる**（しゅん指定 2026-11-12、004で採用）：しゅんが選んだ場面を元素材から書き出し（動画のテロップは入れない）、いつものテロップ形式でカバー用の一言（例「Be a sushi chef in Tsukiji」）を入れて、リポジトリ直下に cover_XXX.jpg として push し、Metricool の `videoThumbnailUrl` に raw URL を渡す（videoCoverMilliseconds の代わり）。TikTok・YouTubeはアカウントの種類によって反映されないことがある。**YouTubeは実際に失敗した**（004、2026-11-12：動画は公開されたがMetricoolから「Could not upload its thumbnail」のエラーメール）。YouTubeのカバーは投稿後にしゅんがYouTube Studio／YouTubeアプリで手動設定する前提で、カバー画像をしゅんに渡しておく
+- **カバーは文字入りのカバー専用画像も作れる**（しゅん指定 2026-11-12、004で採用）：しゅんが選んだ場面を元素材から書き出し（動画のテロップは入れない）、いつものテロップ形式でカバー用の一言（例「Be a sushi chef in Tsukiji」）を入れて、リポジトリ直下に cover_XXX.jpg として push し、Metricool の `videoThumbnailUrl` に raw URL を渡す（videoCoverMilliseconds の代わり）。TikTok・YouTubeはアカウントの種類によって反映されないことがある。**YouTubeは実際に失敗した**（004、2026-11-12：動画は公開されたがMetricoolから「Could not upload its thumbnail」のエラーメール）。YouTubeのカバーは投稿後にしゅんがYouTube Studio／YouTubeアプリで手動設定する前提で、カバー画像をしゅんに渡しておく。**005から、YouTubeはIG・FB・TikTokとは別の予約にしてカバー（videoThumbnailUrl／videoCoverMilliseconds）を付けない**（失敗メールを避けるため）
+- **カバーはしゅんに候補（A/B）を見せて選んでもらう**（005：しゅんが「この場面の元クリップから一番いいところ」と指定→同じクリップから2コマ作って選択）
 - **カバーは動画ごとに一番いい笑顔の場面を選び、4SNSで統一**（004は20秒地点＝2人の笑顔と締めのテロップ。videoCoverMilliseconds に秒×1000を入れる）。冒頭0.8秒固定ではない
 - **キャプションで体験の工程（着替え→職人→握り→食べる…）を順に説明しない**（しゅん指定 2026-11-12）。動画で見せている流れはテロップに任せ、キャプションはゲストへの感謝・その夜の雰囲気・安心材料など別のことを書く
 - 全SNS共通で同じキャプションを使う（コピペ1回で済むように）
@@ -114,6 +115,7 @@
 | 002 | POV：自分で握る体験（BGM: optimistic-road-trip／2026-10-18 公開：IG Demmvgfj-Md／TikTok 7697683978794519815／FB reel 2391165585047117／YT shorts lROFlmEeX6U）※FBはカバー修正のため3:08に、YouTubeは2:58に再投稿。古い投稿（FB reel 1429328741989688・YT shorts gvVJgArSHZw）は削除済み | 9:16（以前の素材） | POV: You made your own sushi in Tsukiji | 8475_3, 8474, 8466, 8472, 8473, 8476_3, 8482, 8487 |
 | 003 | 初めての寿司づくり（体験工程どおり。BGM: optimistic-road-trip／2026-11-08 2:00 公開：IG DfcrlNcjhtQ／TikTok 7705477187322891541／FB reel 2557540424768225／YT shorts 87vvqzozYLQ）色味は8912基準の自然な色 | 2026-11-04 | His first time making sushi | 8883, 8908, 8911, 8905, 8904, 8912, 8919, 8923, 8914, 7681, 7688 |
 | 004 | Tonight, you're the sushi chef（ゲストがその夜の職人に。BGM: optimistic-road-trip／2026-11-12 3:04 公開：IG DfnF3dECUia／TikTok 7706977662203514130／FB reel 1478065584251692／YT shorts dvArBO1JIHI）カバーは文字入りのカバー画像 cover_004_A.jpg（職人が霜降りの身を手に乗せている場面＋「Be a sushi chef in Tsukiji」、videoThumbnailUrlで指定。YouTubeは「Could not upload video thumbnail」の警告でカバー未反映）。色はオリジナル（HDRをトーンマップ）、テロップはいつもの白文字＋黒縁。※11/12 2:00の初版は色が悪く、しゅんが全SNSから削除して3:04に再投稿 | 2026-11-10 | Tonight, you're the sushi chef | 20261110_IMG_7738, 7739, 7740, 7741 |
+| 005 | Look what we made（2人の女性ゲストが握り・巻き寿司を作って盛り合わせを自慢。BGM: optimistic-road-trip／2026-11-13 2:00 予約：IG・FB・TikTok はカバー画像 cover_005.jpg（盛り合わせを持つ2人の寄り＋「Look what we made in Tsukiji!」、しゅんがA/Bから選択）を videoThumbnailUrl で、YouTube は別予約でカバー指定なし→投稿後にしゅんが手動で差し替え）。色はオリジナル、テロップはいつもの形・工程説明なし | 2026-11-11 | Our best night in Tokyo | 20261111_IMG_7754, 7756, 7763, 7762, 7764, 7771, 7767, 7775, 7773, 7774, 7779, 7780, 7781 |
 
 ## 変更履歴
 - v5：素材の受け取り方（デスクトップの開催日フォルダ・声をかけられたときだけ確認）、投稿結果の確認時刻、公開後の修正ルールを追記。投稿履歴に「使った開催日」の欄を追加（2026-10-18）
