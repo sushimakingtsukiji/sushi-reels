@@ -1,0 +1,110 @@
+{
+ "cta": "assets/cta_booking.mp4",
+ "bgm_file": "optimistic-road-trip-loop-no2.mp3",
+ "bgm_start": 8,
+ "original_color": true,
+ "beats": [
+  {
+   "text": "We made our own\n**sushi** in **Tsukiji**",
+   "size": 96,
+   "clips": [
+    {
+     "src": "20261111_IMG_7754",
+     "in": 1.9,
+     "dur": 2.4
+    }
+   ]
+  },
+  {
+   "text": "Step 1: shape\nyour own **nigiri**",
+   "size": 90,
+   "clips": [
+    {
+     "src": "20261111_IMG_7756",
+     "in": 16.2,
+     "dur": 1.4
+    },
+    {
+     "src": "20261111_IMG_7756",
+     "in": 5.5,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "Step 2: roll\na **sushi roll**",
+   "size": 90,
+   "clips": [
+    {
+     "src": "20261111_IMG_7763",
+     "in": 2.0,
+     "dur": 1.5
+    },
+    {
+     "src": "20261111_IMG_7762",
+     "in": 65.0,
+     "dur": 1.6
+    }
+   ]
+  },
+  {
+   "text": "The chef\n**slices** it up",
+   "size": 90,
+   "clips": [
+    {
+     "src": "20261111_IMG_7765",
+     "in": 8.8,
+     "dur": 3.0
+    }
+   ]
+  },
+  {
+   "text": "Look what\n**we made!**",
+   "size": 96,
+   "clips": [
+    {
+     "src": "20261111_IMG_7775",
+     "in": 6.0,
+     "dur": 1.8
+    },
+    {
+     "src": "20261111_IMG_7773",
+     "in": 8.0,
+     "dur": 1.5
+    },
+    {
+     "src": "20261111_IMG_7774",
+     "in": 4.5,
+     "dur": 1.6
+    }
+   ]
+  },
+  {
+   "text": "Then eat the sushi\n**you made**",
+   "size": 88,
+   "clips": [
+    {
+     "src": "20261111_IMG_7779",
+     "in": 7.5,
+     "dur": 1.6
+    },
+    {
+     "src": "20261111_IMG_7780",
+     "in": 12.3,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "See you in\n**Tsukiji!**",
+   "size": 96,
+   "clips": [
+    {
+     "src": "20261111_IMG_7781",
+     "in": 0.0,
+     "dur": 2.0
+    }
+   ]
+  }
+ ]
+}
