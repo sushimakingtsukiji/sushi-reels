@@ -111,6 +111,7 @@
 | 001 | 初回投稿（体験の流れ） | — | MAKE YOUR OWN SUSHI IN TOKYO! | 時系列 |
 | 002 | POV：自分で握る体験（BGM: optimistic-road-trip／2026-10-18 公開：IG Demmvgfj-Md／TikTok 7697683978794519815／FB reel 2391165585047117／YT shorts lROFlmEeX6U）※FBはカバー修正のため3:08に、YouTubeは2:58に再投稿。古い投稿（FB reel 1429328741989688・YT shorts gvVJgArSHZw）は削除済み | 9:16（以前の素材） | POV: You made your own sushi in Tsukiji | 8475_3, 8474, 8466, 8472, 8473, 8476_3, 8482, 8487 |
 | 003 | 初めての寿司づくり（体験工程どおり。BGM: optimistic-road-trip／2026-11-08 2:00 公開：IG DfcrlNcjhtQ／TikTok 7705477187322891541／FB reel 2557540424768225／YT shorts 87vvqzozYLQ）色味は8912基準の自然な色 | 2026-11-04 | His first time making sushi | 8883, 8908, 8911, 8905, 8904, 8912, 8919, 8923, 8914, 7681, 7688 |
+| 004 | Tonight, you're the sushi chef（ゲストがその夜の職人に。BGM: optimistic-road-trip／2026-11-12 3:04 公開：IG DfnF3dECUia／TikTok 7706977662203514130／FB reel 1478065584251692／YT shorts dvArBO1JIHI）カバーは文字入りのカバー画像 cover_004_A.jpg（職人が霜降りの身を手に乗せている場面＋「Be a sushi chef in Tsukiji」、videoThumbnailUrlで指定。YouTubeは「Could not upload video thumbnail」の警告でカバー未反映）。色はオリジナル（HDRをトーンマップ）、テロップはいつもの白文字＋黒縁。※11/12 2:00の初版は色が悪く、しゅんが全SNSから削除して3:04に再投稿 | 2026-11-10 | Tonight, you're the sushi chef | 20261110_IMG_7738, 7739, 7740, 7741 |
 
 ## 変更履歴
 - v5：素材の受け取り方（デスクトップの開催日フォルダ・声をかけられたときだけ確認）、投稿結果の確認時刻、公開後の修正ルールを追記。投稿履歴に「使った開催日」の欄を追加（2026-10-18）
