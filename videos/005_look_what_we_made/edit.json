@@ -5,7 +5,7 @@
  "original_color": true,
  "beats": [
   {
-   "text": "We made our own\n**sushi** in **Tsukiji**",
+   "text": "Our best night\nin **Tokyo**",
    "size": 96,
    "clips": [
     {
@@ -16,7 +16,7 @@
    ]
   },
   {
-   "text": "Step 1: shape\nyour own **nigiri**",
+   "text": "Laughing the\n**whole time**",
    "size": 90,
    "clips": [
     {
@@ -32,8 +32,8 @@
    ]
   },
   {
-   "text": "Step 2: roll\na **sushi roll**",
-   "size": 90,
+   "text": "A real sushi counter\nin **Tsukiji**",
+   "size": 84,
    "clips": [
     {
      "src": "20261111_IMG_7763",
@@ -48,13 +48,18 @@
    ]
   },
   {
-   "text": "The chef\n**slices** it up",
-   "size": 90,
+   "text": "Made with\n**our own hands**",
+   "size": 88,
    "clips": [
     {
-     "src": "20261111_IMG_7765",
-     "in": 8.8,
-     "dur": 3.0
+     "src": "20261111_IMG_7762",
+     "in": 44.0,
+     "dur": 1.5
+    },
+    {
+     "src": "20261111_IMG_7767",
+     "in": 24.0,
+     "dur": 1.6
     }
    ]
   },
@@ -80,7 +85,7 @@
    ]
   },
   {
-   "text": "Then eat the sushi\n**you made**",
+   "text": "Then eat the sushi\n**we made**",
    "size": 88,
    "clips": [
     {
