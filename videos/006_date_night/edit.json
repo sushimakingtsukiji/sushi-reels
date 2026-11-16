@@ -5,50 +5,45 @@
  "original_color": true,
  "beats": [
   {
-   "text": "Date night idea\nin **Tokyo**",
-   "size": 96,
+   "text": "Suit up for a\n**sushi date night**",
+   "size": 90,
    "clips": [
+    {
+     "src": "20261115_IMG_7800",
+     "in": 9.2,
+     "dur": 1.3
+    },
     {
      "src": "20261115_IMG_7804",
      "in": 18.0,
      "dur": 1.4
-    },
-    {
-     "src": "20261115_IMG_7803",
-     "in": 4.5,
-     "dur": 1.3
     }
    ]
   },
   {
-   "text": "Taught by a\n**real sushi chef**",
+   "text": "Mix the\n**sushi rice**",
+   "size": 92,
+   "clips": [
+    {
+     "src": "20261115_IMG_7803",
+     "in": 4.5,
+     "dur": 1.3
+    },
+    {
+     "src": "20261115_IMG_7802",
+     "in": 0.0,
+     "dur": 1.2
+    }
+   ]
+  },
+  {
+   "text": "Learn from a\n**real sushi chef**",
    "size": 88,
    "clips": [
     {
      "src": "20261115_IMG_7809",
      "in": 2.4,
      "dur": 1.5
-    },
-    {
-     "src": "20261115_IMG_7817",
-     "in": 5.4,
-     "dur": 1.4
-    }
-   ]
-  },
-  {
-   "text": "Harder than\nit **looks!**",
-   "size": 92,
-   "clips": [
-    {
-     "src": "20261115_IMG_7817",
-     "in": 10.8,
-     "dur": 1.4
-    },
-    {
-     "src": "20261115_IMG_7816",
-     "in": 0.9,
-     "dur": 1.3
     },
     {
      "src": "20261115_IMG_7811",
@@ -58,13 +53,34 @@
    ]
   },
   {
-   "text": "Rolling it\n**together**",
+   "text": "Shape your\n**own nigiri**",
    "size": 92,
    "clips": [
     {
-     "src": "20261115_IMG_7825",
+     "src": "20261115_IMG_7817",
+     "in": 10.8,
+     "dur": 1.4
+    },
+    {
+     "src": "20261115_IMG_7814",
+     "in": 2.0,
+     "dur": 1.2
+    },
+    {
+     "src": "20261115_IMG_7808",
+     "in": 20.4,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "Roll it\n**together**",
+   "size": 92,
+   "clips": [
+    {
+     "src": "20261115_IMG_7827",
      "in": 6.0,
-     "dur": 1.3
+     "dur": 1.2
     },
     {
      "src": "20261115_IMG_7830",
@@ -73,40 +89,35 @@
     },
     {
      "src": "20261115_IMG_7830",
-     "in": 26.5,
+     "in": 27.0,
      "dur": 1.4
     }
    ]
   },
   {
-   "text": "So proud of\n**what we made**",
-   "size": 90,
+   "text": "Look what\n**we made!**",
+   "size": 96,
    "clips": [
     {
-     "src": "20261115_IMG_7832",
-     "in": 1.0,
-     "dur": 1.8
+     "src": "20261115_IMG_7822",
+     "in": 0.5,
+     "dur": 1.2
     },
     {
      "src": "20261115_IMG_7832",
-     "in": 6.3,
-     "dur": 1.5
+     "in": 6.0,
+     "dur": 2.0
     }
    ]
   },
   {
-   "text": "Then eat the sushi\n**we made**",
+   "text": "Then eat the sushi\n**you made**",
    "size": 88,
    "clips": [
     {
      "src": "20261115_IMG_7836",
-     "in": 1.6,
-     "dur": 1.7
-    },
-    {
-     "src": "20261115_IMG_7836",
-     "in": 5.8,
-     "dur": 1.4
+     "in": 1.8,
+     "dur": 2.4
     }
    ]
   },
@@ -115,9 +126,9 @@
    "size": 96,
    "clips": [
     {
-     "src": "20261115_IMG_7836",
-     "in": 8.0,
-     "dur": 1.4
+     "src": "20261115_IMG_7835",
+     "in": 2.6,
+     "dur": 1.6
     }
    ]
   }
