@@ -4,19 +4,122 @@
  "bgm_start": 52,
  "original_color": true,
  "beats": [
-  {"text": "Date night idea\nin **Tokyo**", "size": 96,
-   "clips": [{"src": "20261115_IMG_7815", "in": 4.3, "dur": 1.1}, {"src": "20261115_IMG_7816", "in": 0.9, "dur": 1.3}]},
-  {"text": "Taught by a\n**real sushi chef**", "size": 88,
-   "clips": [{"src": "20261115_IMG_7809", "in": 2.4, "dur": 1.6}, {"src": "20261115_IMG_7809", "in": 5.6, "dur": 1.3}]},
-  {"text": "Harder than\nit **looks!**", "size": 92,
-   "clips": [{"src": "20261115_IMG_7819", "in": 3.0, "dur": 1.3}, {"src": "20261115_IMG_7816", "in": 3.5, "dur": 1.3}, {"src": "20261115_IMG_7815", "in": 0.0, "dur": 1.2}]},
-  {"text": "Rolling it\n**together**", "size": 92,
-   "clips": [{"src": "20261115_IMG_7828", "in": 0.2, "dur": 1.4}, {"src": "20261115_IMG_7829", "in": 0.9, "dur": 1.3}]},
-  {"text": "So proud of\n**what we made**", "size": 90,
-   "clips": [{"src": "20261115_IMG_7822", "in": 0.5, "dur": 1.3}, {"src": "20261115_IMG_7832", "in": 1.0, "dur": 1.8}, {"src": "20261115_IMG_7832", "in": 6.3, "dur": 1.5}]},
-  {"text": "Then eat the sushi\n**we made**", "size": 88,
-   "clips": [{"src": "20261115_IMG_7836", "in": 1.6, "dur": 1.7}, {"src": "20261115_IMG_7836", "in": 5.8, "dur": 1.4}]},
-  {"text": "See you in\n**Tsukiji!**", "size": 96,
-   "clips": [{"src": "20261115_IMG_7836", "in": 8.0, "dur": 1.4}]}
+  {
+   "text": "Date night idea\nin **Tokyo**",
+   "size": 96,
+   "clips": [
+    {
+     "src": "20261115_IMG_7804",
+     "in": 18.0,
+     "dur": 1.4
+    },
+    {
+     "src": "20261115_IMG_7803",
+     "in": 4.5,
+     "dur": 1.3
+    }
+   ]
+  },
+  {
+   "text": "Taught by a\n**real sushi chef**",
+   "size": 88,
+   "clips": [
+    {
+     "src": "20261115_IMG_7809",
+     "in": 2.4,
+     "dur": 1.5
+    },
+    {
+     "src": "20261115_IMG_7817",
+     "in": 5.4,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "Harder than\nit **looks!**",
+   "size": 92,
+   "clips": [
+    {
+     "src": "20261115_IMG_7817",
+     "in": 10.8,
+     "dur": 1.4
+    },
+    {
+     "src": "20261115_IMG_7816",
+     "in": 0.9,
+     "dur": 1.3
+    },
+    {
+     "src": "20261115_IMG_7811",
+     "in": 5.8,
+     "dur": 1.3
+    }
+   ]
+  },
+  {
+   "text": "Rolling it\n**together**",
+   "size": 92,
+   "clips": [
+    {
+     "src": "20261115_IMG_7825",
+     "in": 6.0,
+     "dur": 1.3
+    },
+    {
+     "src": "20261115_IMG_7830",
+     "in": 7.0,
+     "dur": 1.4
+    },
+    {
+     "src": "20261115_IMG_7830",
+     "in": 26.5,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "So proud of\n**what we made**",
+   "size": 90,
+   "clips": [
+    {
+     "src": "20261115_IMG_7832",
+     "in": 1.0,
+     "dur": 1.8
+    },
+    {
+     "src": "20261115_IMG_7832",
+     "in": 6.3,
+     "dur": 1.5
+    }
+   ]
+  },
+  {
+   "text": "Then eat the sushi\n**we made**",
+   "size": 88,
+   "clips": [
+    {
+     "src": "20261115_IMG_7836",
+     "in": 1.6,
+     "dur": 1.7
+    },
+    {
+     "src": "20261115_IMG_7836",
+     "in": 5.8,
+     "dur": 1.4
+    }
+   ]
+  },
+  {
+   "text": "See you in\n**Tsukiji!**",
+   "size": 96,
+   "clips": [
+    {
+     "src": "20261115_IMG_7836",
+     "in": 8.0,
+     "dur": 1.4
+    }
+   ]
+  }
  ]
 }
